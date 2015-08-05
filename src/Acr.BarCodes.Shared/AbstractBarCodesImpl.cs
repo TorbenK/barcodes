@@ -30,7 +30,8 @@ namespace Acr.BarCodes {
 
 
 		public virtual Stream Create(BarCodeCreateConfiguration cfg) {
-            var writer = new BarcodeWriter {
+#if __ANDROID__
+            var writer = new ZXing.BarcodeWriter {
 				Format = (BarcodeFormat)Enum.Parse(typeof(BarcodeFormat), cfg.Format.ToString()),
                 Encoder = new MultiFormatWriter(),
                 Options = new EncodingOptions {
@@ -40,6 +41,21 @@ namespace Acr.BarCodes {
 					PureBarcode = cfg.PureBarcode
                 }
             };
+#endif
+#if __IOS__
+            var writer = new ZXing.Mobile.BarcodeWriter
+            {
+                Format = (BarcodeFormat)Enum.Parse(typeof(BarcodeFormat), cfg.Format.ToString()),
+                Encoder = new MultiFormatWriter(),
+                Options = new EncodingOptions
+                {
+                    Height = cfg.Height,
+                    Margin = cfg.Margin,
+                    Width = cfg.Height,
+                    PureBarcode = cfg.PureBarcode
+                }
+            };
+#endif
             return this.ToImageStream(writer, cfg);
         }
 
@@ -89,7 +105,12 @@ namespace Acr.BarCodes {
 
         
         protected abstract MobileBarcodeScanner GetInstance();
-        protected abstract Stream ToImageStream(BarcodeWriter writer, BarCodeCreateConfiguration cfg);
+#if __IOS__
+        protected abstract Stream ToImageStream(ZXing.Mobile.BarcodeWriter writer, BarCodeCreateConfiguration cfg);
+#endif
+#if __ANDROID__
+        protected abstract Stream ToImageStream(ZXing.BarcodeWriter writer, BarCodeCreateConfiguration cfg);
+#endif
     }
 }
 #endif

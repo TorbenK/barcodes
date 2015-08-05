@@ -19,12 +19,13 @@ namespace Acr.BarCodes {
 
 
         protected override MobileBarcodeScanner GetInstance() {
-            var scanner = new MobileBarcodeScanner(this.getTopActivity());
+            
+            var scanner = new MobileBarcodeScanner();
             if (BarCodes.CustomOverlayFactory != null) {
                 var overlay = BarCodes.CustomOverlayFactory();
                 if (overlay != null) {
                     scanner.UseCustomOverlay = true;
-                    scanner.CustomOverlay = overlay;
+                    //scanner.CustomOverlay = overlay;
                 }
             }
             return scanner;
@@ -38,8 +39,8 @@ namespace Acr.BarCodes {
 				? Bitmap.CompressFormat.Png
 				: Bitmap.CompressFormat.Jpeg;
 
-			using (var bitmap = writer.Write(cfg.BarCode))
-				bitmap.Compress(cf, 0, stream);
+            var barcode = writer.Write(cfg.BarCode);
+            stream.Write(barcode, 0, barcode.Length);            
 
 			stream.Position = 0;
 			return stream;

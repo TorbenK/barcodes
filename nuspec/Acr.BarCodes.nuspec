@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>Acr.BarCodes</id>
-        <version>3.1.0</version>
+        <id>Acr.BarCodes.TEMP</id>
+        <version>3.2.0</version>
         <title>ACR Barcodes Plugin for Xamarin and Windows</title>
         <description>A cross platform barcode scanner/creator built on top of ZXing.Net.Mobile to allow for easy cross platform access from your Shared/PCL core libraries</description>
         <authors>Allan Ritchie</authors>
@@ -13,14 +13,14 @@
         <tags>xamarin xam.pcl barcode</tags>
         <dependencies>
             <group targetFramework="MonoAndroid">
-                <dependency id="ZXing.Net.Mobile" version="[1.4.7.1, 2)" />
+                <dependency id="ZXing.Net.Mobile" version="[1.5.1, 2)" />
             </group>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="ZXing.Net.Mobile" version="[1.4.7.1, 2)" />
+                <dependency id="ZXing.Net.Mobile" version="[1.5.1, 2)" />
             </group>
-            <group targetFramework="wp8">
+            <!--<group targetFramework="wp8">
                 <dependency id="ZXing.Net.Mobile" version="[1.4.7.1, 2)" />
-            </group>
+            </group>-->
         </dependencies>
         <releaseNotes>
 Ability to set custom overlay for zxing.net.mobile.  Use BarCodes.CustomOverlayFactory = () => new YourCustomView();
@@ -41,7 +41,7 @@ Interface library now used for better abstraction point
         <file src="..\src\Acr.BarCodes.iOS\bin\iPhone\Release\Acr.BarCodes.Interface.dll" target="lib\Xamarin.iOS10\Acr.BarCodes.Interface.dll" />
 
         <!-- winphone -->
-        <file src="..\src\Acr.BarCodes.WindowsPhone\bin\Release\Acr.BarCodes.dll" target="lib\wp8\Acr.BarCodes.dll" />
-        <file src="..\src\Acr.BarCodes.WindowsPhone\bin\Release\Acr.BarCodes.Interface.dll" target="lib\wp8\Acr.BarCodes.Interface.dll" />
+        <!--<file src="..\src\Acr.BarCodes.WindowsPhone\bin\Release\Acr.BarCodes.dll" target="lib\wp8\Acr.BarCodes.dll" />
+        <file src="..\src\Acr.BarCodes.WindowsPhone\bin\Release\Acr.BarCodes.Interface.dll" target="lib\wp8\Acr.BarCodes.Interface.dll" />-->
     </files>
 </package>

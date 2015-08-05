@@ -10,7 +10,7 @@ namespace Acr.BarCodes {
 
     public class BarCodesImpl : AbstractBarCodesImpl {
 
-        protected override Stream ToImageStream(BarcodeWriter writer, BarCodeCreateConfiguration cfg) {
+        protected override Stream ToImageStream(ZXing.Mobile.BarcodeWriter writer, BarCodeCreateConfiguration cfg) {
 			return (cfg.ImageType == ImageType.Png)
 				? writer.Write(cfg.BarCode).AsPNG().AsStream()
 				: writer.Write(cfg.BarCode).AsJPEG().AsStream();
